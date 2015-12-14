@@ -44,6 +44,7 @@ manuel:isdev@1.0.0
 manuel:reactivearray@1.0.5
 manuel:viewmodel@2.5.2
 manuel:viewmodel-debug@2.4.0
+me:x-ray@2.0.2
 meteor@1.1.10
 meteor-base@1.0.1
 meteorhacks:async@1.0.0

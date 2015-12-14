@@ -1,0 +1,54 @@
+<template name="imagefap">
+    <div class="ui two column centered grid">
+        <div class="column">
+            <div class="ui fluid action input">
+                <input type="text" placeholder="Search..." {{b "value : Term"}}>
+                <div class="ui button" {{b "click : SearchImage"}}>Search</div>
+            </div>
+        </div>
+    </div>
+    <div class="ui grid">
+        <div class="row">
+            <div class="column">
+                <table class="ui celled table">
+                    <thead>
+                        <tr>
+                            <th>Album name</th>
+                            <th>Images</th>
+                            <th>Quality</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr {{b "if : isSearching"}}>
+                            <td colspan="3">Searching...</td>
+                        </tr>
+                        {{#if isFound}}
+                        {{#each result}}
+                            {{> imagefap_result_item}}
+                        {{/each}}
+                        {{/if}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template name="imagefap_result_item">
+    <tr id="{{id}}">
+        <td>
+            <a href="#" class="album-name">{{title}}</a>
+            <div class="ui flowing popup top left transition hidden">
+                <div class="ui four column divided center aligned grid">
+                    {{#each thumbs}}
+                    <div class="column">
+                        <p><img src="{{this}}" alt="{{this}}" class="ui fluid image"/></p>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </td>
+        <td>{{count}}</td>
+        <td>{{quality}}</td>
+    </tr>
+</template>
