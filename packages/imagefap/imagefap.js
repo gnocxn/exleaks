@@ -19,7 +19,10 @@ if (Meteor.isServer) {
                             }]
                         ),
                         items2: x('tr[valign]', [{
-                            thumbs: ['img.gal_thumb@src']
+                            thumbs : x('a[title]',[{
+                                href : '@href',
+                                src : 'img.gal_thumb@src'
+                            }])
                         }])
                     })(function (error, data) {
                         if (error)done(error, null);
@@ -39,6 +42,35 @@ if (Meteor.isServer) {
                 if (rs.result) return rs.result;
             } catch (ex) {
                 //console.log('Error', ex);
+                throw new Meteor.Error(ex);
+            }
+        },
+        imagefap_fetchAlbum2: function(albumHref){
+            try{
+                var r = request.getSync(albumHref);
+                return r.body;
+            }catch(ex){
+                console.log(ex);
+            }
+        },
+        imagefap_fetchAlbum : function(albumHref){
+            try{
+                var rs = Async.runSync(function(done){
+                    var x = Xray();
+                    x(albumHref, {
+                        albumId : '#galleryid_input@value',
+                        items : x('a[name]',[{
+                            imageId : '@name',
+                            thumb : 'img@src'
+                        }])
+                    })(function(error, data){
+                        done(error, data);
+                    })
+                });
+
+                if(rs.error) throw new Meteor.Error(rs.error);
+                if(rs.result)return rs.result;
+            }catch(ex){
                 throw new Meteor.Error(ex);
             }
         }

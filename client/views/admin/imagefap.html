@@ -1,9 +1,19 @@
 <template name="imagefap">
-    <div class="ui two column centered grid">
+    <div class="ui three column grid">
         <div class="column">
-            <div class="ui fluid action input">
+            <div class="ui action input">
                 <input type="text" placeholder="Search..." {{b "value : Term"}}>
                 <div class="ui button" {{b "click : SearchImage"}}>Search</div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui input">
+                <input type="number" {{b "value : Limit"}} step="50" min="50" max="200"/>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui input">
+                <input type="number" {{b "value : Page"}} min="0"/>
             </div>
         </div>
     </div>
@@ -16,11 +26,12 @@
                             <th>Album name</th>
                             <th>Images</th>
                             <th>Quality</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr {{b "if : isSearching"}}>
-                            <td colspan="3">Searching...</td>
+                            <td colspan="4">Searching...</td>
                         </tr>
                         {{#if isFound}}
                         {{#each result}}
@@ -37,12 +48,12 @@
 <template name="imagefap_result_item">
     <tr id="{{id}}">
         <td>
-            <a href="#" class="album-name">{{title}}</a>
+            <a href="{{href}}" target="_blank" class="album-name">{{title}}</a>
             <div class="ui flowing popup top left transition hidden">
                 <div class="ui four column divided center aligned grid">
                     {{#each thumbs}}
                     <div class="column">
-                        <p><img src="{{this}}" alt="{{this}}" class="ui fluid image"/></p>
+                        <p><img src="{{this.src}}" alt="{{this.src}}" class="ui fluid image"/></p>
                     </div>
                     {{/each}}
                 </div>
@@ -50,5 +61,10 @@
         </td>
         <td>{{count}}</td>
         <td>{{quality}}</td>
+        <td>
+            <button class="ui button" {{b "click : fetchImages"}}>
+                Fetch
+            </button>
+        </td>
     </tr>
 </template>
