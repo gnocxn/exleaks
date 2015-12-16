@@ -2,6 +2,7 @@ if (Meteor.isServer) {
     Meteor.methods({
         importAlbum: function (album) {
             try {
+                var result = false;
                 check(album,{
                     _albumId : String,
                     title : String,
@@ -24,10 +25,11 @@ if (Meteor.isServer) {
                             src : image.image,
                             updatedAt : updatedAt
                         })
-                    })
-                    return true;
+                    });
+                    result = true;
                 }
-                return false;
+                console.log('imported?',result)
+                return result;
             } catch (ex) {
                 console.log(ex);
                 throw new Meteor.Error(ex);

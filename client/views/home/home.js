@@ -15,10 +15,10 @@ Template.home.rendered = function(){
 Template.home.viewmodel({
     isReady : false,
     albums : function(){
-        return Albums.find();
+        return Albums.find({},{sort : {updatedAt : -1}});
     },
     autorun : function(){
         var subs = this.templateInstance.subscribe('getAlbums');
         this.isReady(subs.ready());
     }
-})
+});
