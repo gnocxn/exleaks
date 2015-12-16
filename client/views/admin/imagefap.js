@@ -36,26 +36,17 @@ Template.imagefap_result_item.rendered = function () {
 Template.imagefap_result_item.viewmodel({
     fetchImages: function (e) {
         e.preventDefault();
-        /*var album = this.data().thumbs[0],
-            albumId = this.data().id;
-        var albumTpl = _.template('<%=href%>?pgid=&gid=<%=albumId%>&page=0'),
-            albumUrl = albumTpl({href: album.href, albumId: albumId});
-        console.warn(albumUrl);
-        Meteor.call('imagefap_fetchAlbum', albumUrl, function (error, data) {
-            if (error) console.error(error);
-            if (data) {
-                console.info(data);
-            }
-        })*/
-
         var albumId = this.data().id;
         var albumTpl = _.template('http://www.imagefap.com/pictures/<%=albumId%>/?gid=<%=albumId%>&view=2'),
             albumUrl = albumTpl({albumId : albumId});
-        console.log(albumUrl);
-        Meteor.call('imagefap_fetchAlbum', albumUrl, function (error, data) {
+        console.warn('import', albumUrl);
+        Meteor.call('imagefap_fetchAlbum', albumUrl,this.data().title, function (error, data) {
             if (error) console.error(error);
             if (data) {
-                console.info(data);
+                Meteor.call('importAlbum',data, function(error,result){
+                    if (error) console.error(error.message);
+                    if(result) console.info(result);
+                })
             }
         })
     }

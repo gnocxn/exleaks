@@ -1,7 +1,22 @@
 <template name="home">
-    <div class="ui grid">
-        <div class="column">
-            <div id="preview"></div>
+    <div class="ui grid container">
+        <div class="sixteen wide column">
+        {{#if isReady}}
+        <div class="masonry">
+            {{#each albums}}
+                <div class="item">
+                    <div class="ui card">
+                        <div class="image">
+                            <a href="{{pathFor 'album_detail' id=_id}}"><img src="{{cover}}" alt="{{title}}" class="ui fluid image"/></a>
+                        </div>
+                    </div>
+
+                </div>
+            {{/each}}
+        </div>
+        {{else}}
+            <p>Loading....</p>
+        {{/if}}
         </div>
     </div>
 </template>

@@ -2,6 +2,7 @@
 if (Meteor.isServer) {
     Meteor.methods({
         imagefap_Search: function (term, limit, page) {
+            this.unblock();
             try {
                 check(term, String);
                 var searchUrlTpl = _.template('http://www.imagefap.com/gallery.php?type=1&gen=0&search=<%=term%>&sort=quality&perpage=<%=limit%>&order=1&page=<%=page%>'),
@@ -47,28 +48,21 @@ if (Meteor.isServer) {
             }
         },
 
-        imagefap_fetchAlbum: function (albumHref) {
+        imagefap_fetchAlbum: function (albumHref, title) {
+            this.unblock();
             try {
                 var rs = Async.runSync(function (done) {
-                    /*var x = Xray();
-                     x(albumHref, {
-                     albumId : '#galleryid_input@value',
-                     items : x('a[name]',[{
-                     imageId : '@name',
-                     href : '@href',
-                     thumb : 'img@src'
-                     }])
-                     })(function(error, data){
-                     done(error, data);
-                     })*/
                     async.waterfall([
                         function (cb) {
                             var x = Xray();
                             x(albumHref, {
                                 albumId: '#galleryid_input@value',
+                                keywords: 'meta[name="keywords"]@content',
+                                description: 'meta[name="description"]@content',
+                                categories: ['#cnt_cats a@text'],
+                                tags: ['#cnt_tags a@text'],
                                 images: x('a[name]', [{
                                     imageId: '@name',
-                                    href: '@href',
                                     thumb: 'img@src'
                                 }])
                             })(function (error, data) {
@@ -81,57 +75,75 @@ if (Meteor.isServer) {
                                 albumId = rs1.albumId;
                             if (rs1.images.length <= 24) {
                                 var url = urlTpl({
-                                    firstImageId : firstImage.imageId,
-                                    albumId : albumId,
-                                    page : 0
+                                    firstImageId: firstImage.imageId,
+                                    albumId: albumId,
+                                    page: 0
                                 });
                                 var x = Xray();
-                                x(url,{
-                                    images : x('a[original]',[{
-                                        imageId : '@imageid',
-                                        image : '@original'
+                                x(url, {
+                                    images: x('a[original]', [{
+                                        imageId: '@imageid',
+                                        image: '@original'
                                     }])
-                                })(function(error, data){
+                                })(function (error, data) {
                                     var items = data.images || [];
-                                    var images = _.map(rs1.images, function(i){
-                                        var j = _.findWhere(items,{imageId : i.imageId}) || {};
-                                        return _.extend(i, {image : j.image});
+                                    var images = _.map(rs1.images, function (i) {
+                                        var j = _.findWhere(items, {imageId: i.imageId}) || {};
+                                        return _.extend(i, {image: j.image});
                                     })
-                                    cb1(error, _.extend(rs1, {images : images}));
+                                    cb1(error, _.extend(rs1, {images: images}));
                                 })
                             } else {
                                 var pages = parseInt(rs1.images.length / 24);
                                 var urls = [];
                                 for (i = 0; i <= pages; i++) {
                                     var url = urlTpl({
-                                        firstImageId : firstImage.imageId,
-                                        albumId : albumId,
-                                        page : i*24
+                                        firstImageId: firstImage.imageId,
+                                        albumId: albumId,
+                                        page: i * 24
                                     });
                                     urls.push(url);
                                 }
-                                async.map(urls, function(url, cb){
+                                async.map(urls, function (url, cb) {
                                     var x = Xray();
-                                    x(url,{
-                                        images : x('a[original]',[{
-                                            imageId : '@imageid',
-                                            image : '@original'
+                                    x(url, {
+                                        images: x('a[original]', [{
+                                            imageId: '@imageid',
+                                            image: '@original'
                                         }])
-                                    })(function(error, data){
+                                    })(function (error, data) {
                                         cb(error, data.images || []);
                                     })
-                                }, function(error, result){
+                                }, function (error, result) {
                                     var items = _.flatten(result);
-                                    var images = _.map(rs1.images, function(i){
-                                        var j = _.findWhere(items,{imageId : i.imageId}) || {};
-                                        return _.extend(i, {image : j.image});
+                                    var images = _.map(rs1.images, function (i) {
+                                        var j = _.findWhere(items, {imageId: i.imageId}) || {};
+                                        return _.extend(i, {image: j.image});
                                     })
-                                   cb1(error, _.extend(rs1, {images : images}));
+                                    cb1(error, _.extend(rs1, {images: images}));
                                 })
                             }
                         }
                     ], function (error, result) {
-                        done(error, result);
+                        var tt = _.map(result.tags, function (t) {
+                                return t.trim().toLowerCase()
+                            }),
+                            cc = _.map(result.categories, function (c) {
+                                return c.trim().toLowerCase()
+                            }),
+                            kk = s.words(result.keywords.toLowerCase(), ',');
+                        tags = _.filter(_.union(tt, cc), function (t) {
+                            return s.isBlank(t) === false
+                        });
+                        var album = {
+                            _albumId: result.albumId,
+                            title: s.humanize(title || ''),
+                            description: result.description,
+                            tags: tags,
+                            images: result.images,
+                            source: 'IMAGEFAP'
+                        }
+                        done(error, album);
                     })
                 });
 

@@ -1,5 +1,5 @@
 Template.home.rendered = function(){
-    $(document).ready(function(){
+    /*$(document).ready(function(){
         var text =  watermark.text;
         watermark(['http://x.imagefapusercontent.com/u/Mistergone/5852438/846074698/New_folder_alt_IMG_7571_1600x1067.JPG'],function(img){
             img.crossOrigin = 'anonymous';
@@ -9,5 +9,16 @@ Template.home.rendered = function(){
                 img.width="500";
                 document.getElementById('preview').appendChild(img);
             });
-    })
+    })*/
 }
+
+Template.home.viewmodel({
+    isReady : false,
+    albums : function(){
+        return Albums.find();
+    },
+    autorun : function(){
+        var subs = this.templateInstance.subscribe('getAlbums');
+        this.isReady(subs.ready());
+    }
+})

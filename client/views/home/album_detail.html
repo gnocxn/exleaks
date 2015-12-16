@@ -1,0 +1,22 @@
+<template name="album_detail">
+    <div class="ui grid container">
+        <div class="sixteen wide column">
+            {{#if isReady}}
+                <div class="masonry">
+                    {{#each images}}
+                        <div class="item">
+                            <div class="ui card">
+                                <div class="image">
+                                    <img src="{{thumb}}" alt="{{imageId}}" class="ui fluid image"/>
+                                </div>
+                            </div>
+
+                        </div>
+                    {{/each}}
+                </div>
+            {{else}}
+                <p>Loading....</p>
+            {{/if}}
+        </div>
+    </div>
+</template>
