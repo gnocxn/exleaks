@@ -22,7 +22,6 @@ arillo:flow-router-helpers
 manuel:viewmodel
 semantic:ui
 flemay:less-autoprefixer
-gnocxn:osmosis
 gnocxn:imagefap
 check
 underscore
