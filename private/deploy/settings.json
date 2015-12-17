@@ -1,0 +1,16 @@
+{
+  "public": {
+    "imageSites": [
+      {
+        "name" : "IMAGEFAP",
+        "search" : "imagefap_Search",
+        "detail" : "imagefap_fetchAlbum"
+      },
+      {
+        "name" : "XHAMSTER",
+        "search" : "xhamster_Search",
+        "detail" : "xhamster_fetchAlbum"
+      }
+    ]
+  }
+}

@@ -2,7 +2,7 @@ Template.image_loading.viewmodel({
     isLoading : true,
     onRendered : function(){
         var self = this;
-        var imageSrc = self.templateInstance.data;
+        var imageSrc = self.templateInstance.data.src;
         var image = self.templateInstance.find('img');
         var downloadingImage = new Image();
         downloadingImage.onload = function(){

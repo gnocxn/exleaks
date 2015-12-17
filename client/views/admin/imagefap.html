@@ -1,19 +1,23 @@
 <template name="imagefap">
-    <div class="ui three column grid">
-        <div class="column">
-            <div class="ui action input">
+    <div class="ui grid">
+        <div class="six wide column">
+            <div class="ui action fluid input">
                 <input type="text" placeholder="Search..." {{b "value : Term"}}>
-                <div class="ui button" {{b "click : SearchImage"}}>Search</div>
+                <div class="ui primary {{isEnableSearch}} button" {{b "click : SearchImage"}}>Search</div>
             </div>
         </div>
-        <div class="column">
+        <div class="six wide column">
+            {{#each Sites}}
+            <div class="ui checkbox">
+                <input type="checkbox" value="{{search}}" {{b "group : selectedSites"}}>
+                <label>{{name}}</label>
+            </div>
+            {{/each}}
             <div class="ui input">
                 <input type="number" {{b "value : Limit"}} step="50" min="50" max="200"/>
             </div>
-        </div>
-        <div class="column">
             <div class="ui input">
-                <input type="number" {{b "value : Page"}} min="0"/>
+                <input type="number" {{b "value : Page"}} min="0" step="1" max="50"/>
             </div>
         </div>
     </div>
@@ -50,7 +54,7 @@
         <td>
             <a href="{{href}}" target="_blank" class="album-name">{{title}}</a>
             <div class="ui flowing popup top left transition hidden">
-                <div class="ui four column divided center aligned grid">
+                <div class="ui {{thumbsColumns}} column divided center aligned grid">
                     {{#each thumbs}}
                     <div class="column">
                         <p><img src="{{this.src}}" alt="{{this.src}}" class="ui fluid image"/></p>
