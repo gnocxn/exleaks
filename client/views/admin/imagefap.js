@@ -16,7 +16,9 @@ Template.imagefap.viewmodel({
         this.isSearching(true);
         SearchResult.remove({});
         var self = this;
-        var searchMethods = _.map(this.selectedSites(),function(s){ return s});
+        var searchMethods = _.map(this.selectedSites(), function (s) {
+            return s
+        });
         Meteor.call('searchAlbum', searchMethods, this.Term(), this.Page(), this.Limit(), function (error, data) {
             if (error) {
                 console.error(error);
@@ -50,7 +52,7 @@ Template.imagefap_result_item.rendered = function () {
 }
 
 Template.imagefap_result_item.viewmodel({
-    thumbsColumns : function(){
+    thumbsColumns: function () {
         return this.data().thumbs.length == 4 ? 'four' : 'one'
     },
     isFetched: function () {
@@ -59,12 +61,12 @@ Template.imagefap_result_item.viewmodel({
     },
     fetchImages: function (e) {
         e.preventDefault();
-        var albumId = this.data().id;
         var self = this;
-        Meteor.call('imagefap_fetchAlbum', albumId, this.data().title, function (error, data) {
+        Meteor.call('fetchAlbum', this.data(), function (error, result) {
             if (error) console.error(error);
-            if (data) {
-                Meteor.call('importAlbum', data, function (error, result) {
+            if (result) {
+                console.info(result);
+                Meteor.call('importAlbum', result, function (error, result) {
                     if (error) console.error(error.message);
                     if (result) {
                         self.isFetched(result);
@@ -74,5 +76,21 @@ Template.imagefap_result_item.viewmodel({
                 })
             }
         })
+        /*var albumId = this.data().id,
+         href = this.data().href;
+         var self = this;*/
+        /*Meteor.call('imagefap_fetchAlbum', albumId, this.data().title, function (error, data) {
+         if (error) console.error(error);
+         if (data) {
+         Meteor.call('importAlbum', data, function (error, result) {
+         if (error) console.error(error.message);
+         if (result) {
+         self.isFetched(result);
+         console.info(result)
+         }
+         ;
+         })
+         }
+         })*/
     }
 })

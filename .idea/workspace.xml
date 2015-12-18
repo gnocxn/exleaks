@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b71d3e45-dda7-4864-a1cb-1b7315d98871" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/admin/imagefap.html" afterPath="$PROJECT_DIR$/client/views/admin/imagefap.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/___methods.js" afterPath="$PROJECT_DIR$/server/___methods.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/admin/imagefap.js" afterPath="$PROJECT_DIR$/client/views/admin/imagefap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/imagefap/imagefap.js" afterPath="$PROJECT_DIR$/packages/imagefap/imagefap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.meteor/packages" afterPath="$PROJECT_DIR$/.meteor/packages" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/packages/xhamster-photo/xhamster-photo.js" afterPath="$PROJECT_DIR$/packages/xhamster-photo/xhamster-photo.js" />
     </list>
     <ignored path="exleaks.iws" />
@@ -31,17 +30,17 @@
         <entry file="file://$PROJECT_DIR$/server/___methods.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="43" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
+              <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="imagefap.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="imagefap.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/views/admin/imagefap.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="61" column="37" selection-start-line="61" selection-start-column="37" selection-end-line="61" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.22680412">
+              <caret line="67" column="16" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -57,11 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="xhamster-photo.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="xhamster-photo.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/packages/xhamster-photo/xhamster-photo.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45876288">
-              <caret line="42" column="50" selection-start-line="42" selection-start-column="50" selection-end-line="42" selection-end-column="50" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="54" column="77" selection-start-line="54" selection-start-column="77" selection-end-line="54" selection-end-column="77" />
               <folding />
             </state>
           </provider>
@@ -71,7 +70,7 @@
         <entry file="file://$PROJECT_DIR$/packages/imagefap/imagefap.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="137" column="53" selection-start-line="137" selection-start-column="53" selection-end-line="137" selection-end-column="53" />
+              <caret line="87" column="45" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -130,11 +129,11 @@
         <option value="$PROJECT_DIR$/client/views/common/image_loading.js" />
         <option value="$PROJECT_DIR$/client/views/home/home.js" />
         <option value="$PROJECT_DIR$/private/deploy/settings.json" />
-        <option value="$PROJECT_DIR$/server/___methods.js" />
         <option value="$PROJECT_DIR$/client/views/admin/imagefap.html" />
         <option value="$PROJECT_DIR$/packages/imagefap/imagefap.js" />
         <option value="$PROJECT_DIR$/client/views/admin/imagefap.js" />
         <option value="$PROJECT_DIR$/packages/xhamster-photo/xhamster-photo.js" />
+        <option value="$PROJECT_DIR$/server/___methods.js" />
       </list>
     </option>
   </component>
@@ -865,14 +864,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server/___methods.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="43" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/private/deploy/settings.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.25">
@@ -884,23 +875,31 @@
     <entry file="file://$PROJECT_DIR$/packages/imagefap/imagefap.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="137" column="53" selection-start-line="137" selection-start-column="53" selection-end-line="137" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/admin/imagefap.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="61" column="37" selection-start-line="61" selection-start-column="37" selection-end-line="61" selection-end-column="37" />
+          <caret line="87" column="45" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="45" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/packages/xhamster-photo/xhamster-photo.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45876288">
-          <caret line="42" column="50" selection-start-line="42" selection-start-column="50" selection-end-line="42" selection-end-column="50" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="54" column="77" selection-start-line="54" selection-start-column="77" selection-end-line="54" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/___methods.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/admin/imagefap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22680412">
+          <caret line="67" column="16" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="16" />
           <folding />
         </state>
       </provider>
