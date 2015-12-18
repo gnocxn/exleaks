@@ -60,11 +60,8 @@ Template.imagefap_result_item.viewmodel({
     fetchImages: function (e) {
         e.preventDefault();
         var albumId = this.data().id;
-        var albumTpl = _.template('http://www.imagefap.com/pictures/<%=albumId%>/?gid=<%=albumId%>&view=2'),
-            albumUrl = albumTpl({albumId: albumId});
         var self = this;
-        console.warn('import', albumUrl);
-        Meteor.call('imagefap_fetchAlbum', albumUrl, this.data().title, function (error, data) {
+        Meteor.call('imagefap_fetchAlbum', albumId, this.data().title, function (error, data) {
             if (error) console.error(error);
             if (data) {
                 Meteor.call('importAlbum', data, function (error, result) {

@@ -21,7 +21,11 @@ if(Meteor.isServer){
                             }])
                         }])
                     })(function(error, data){
-                        done(error, data.items || []);
+                        var items = _.map(data.items, function(i){
+                            var id = s.strRight(i.id, '_');
+                            return _.extend(i,{id : id, source : 'XHAMSTER'});
+                        })
+                        done(error, items || []);
                     })
                 });
 
@@ -29,6 +33,17 @@ if(Meteor.isServer){
                 if(rs.result) return rs.result;
             }catch(ex){
                 console.log(ex);
+                throw new Meteor.Error(ex);
+            }
+        },
+        xhamster_fetchAlbum : function(albumId, title){
+            try{
+                var albumTpl = _.template('http://xhamster.com/photos/ajax.php?act=slide&gid=<%=albumId%>'),
+                    albumUrl = albumTpl({albumId: albumId});
+                var r = request.getSync(albumUrl);
+                var images = JSON.parse(r.body);
+                return images;
+            }catch(ex){
                 throw new Meteor.Error(ex);
             }
         }

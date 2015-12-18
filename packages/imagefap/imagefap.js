@@ -48,14 +48,16 @@ if (Meteor.isServer) {
             }
         },
 
-        imagefap_fetchAlbum: function (albumHref, title) {
+        imagefap_fetchAlbum: function (albumId, title) {
             this.unblock();
             try {
+                var albumTpl = _.template('http://www.imagefap.com/pictures/<%=albumId%>/?gid=<%=albumId%>&view=2'),
+                    albumUrl = albumTpl({albumId: albumId});
                 var rs = Async.runSync(function (done) {
                     async.waterfall([
                         function (cb) {
                             var x = Xray();
-                            x(albumHref, {
+                            x(albumUrl, {
                                 albumId: '#galleryid_input@value',
                                 keywords: 'meta[name="keywords"]@content',
                                 description: 'meta[name="description"]@content',
