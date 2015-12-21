@@ -1,19 +1,25 @@
 <template name="album_detail">
     <div class="ui grid container">
         <div class="sixteen wide column">
-            {{#if isReady}}
-                <div class="masonry">
-                    {{#each images}}
-                        <div class="item">
-                            <div class="ui card">
-                                <div class="image">
-                                    {{> image_loading src=thumb}}
-                                </div>
+            <div class="masonry">
+                {{#each images}}
+                    <div class="item">
+                        <div class="ui card">
+                            <div class="image">
+                                {{> image_loading src=src}}
                             </div>
-
                         </div>
-                    {{/each}}
-                </div>
+
+                    </div>
+                {{/each}}
+            </div>
+            {{#if Template.subscriptionsReady}}
+                {{#if hasMoreImages}}
+                <button class="ui right labeled icon button" {{b "click : loadMoreImages"}}>
+                    <i class="down arrow icon"></i>
+                    Load More
+                </button>
+                {{/if}}
             {{else}}
                 <p>Loading....</p>
             {{/if}}

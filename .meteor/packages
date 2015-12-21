@@ -37,3 +37,7 @@ meteorhacks:fast-render
 gnocxn:xhamster-photo
 http
 gadicohen:headers
+gnocxn:lwip
+cfs:standard-packages
+cfs:gridfs
+cfs:s3

@@ -1,24 +1,30 @@
 <template name="home">
     <div class="ui grid container">
         <div class="sixteen wide column">
-        {{#if isReady}}
-        <div class="masonry">
-            {{#each albums}}
-                <div class="item">
-                    <div class="ui card">
-                        <div class="image">
-                            <a href="{{pathFor 'album_detail' id=_id}}">
-                            {{> image_loading src=cover}}
-                            </a>
+            <div class="masonry">
+                {{#each albums}}
+                    <div class="item">
+                        <div class="ui card">
+                            <div class="image">
+                                <a href="{{pathFor 'album_detail' id=_id}}">
+                                    {{> image_loading src=cover}}
+                                </a>
+                            </div>
                         </div>
-                    </div>
 
-                </div>
-            {{/each}}
-        </div>
-        {{else}}
-            <p>Loading....</p>
-        {{/if}}
+                    </div>
+                {{/each}}
+            </div>
+            {{#if Template.subscriptionsReady}}
+                {{#if hasMoreAlbums}}
+                <button class="ui right labeled icon button" {{b "click : loadMoreAlbums"}}>
+                    <i class="down arrow icon"></i>
+                    Load More
+                </button>
+                {{/if}}
+            {{else}}
+                <div class="ui text loader">Loading</div>
+            {{/if}}
         </div>
     </div>
 </template>

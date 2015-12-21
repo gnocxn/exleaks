@@ -48,17 +48,42 @@ if (Meteor.isServer) {
                 var existsAlbum = Albums.findOne({_albumId: album._albumId, source: album.source});
                 if (!existsAlbum) {
                     var updatedAt = new Date();
-                    var cover = album.images[0].thumb;
+                    var cover = album.images[0].src;
                     var aId = Albums.insert(_.extend(_.omit(album, 'images'), {cover: cover, updatedAt: updatedAt}));
                     _.each(album.images, function (image) {
                         updatedAt = new Date();
-                        Images.upsert({imageId: image.imageId, albumId: aId}, {
-                            albumId: aId,
-                            imageId: image.imageId,
-                            thumb: image.thumb,
-                            src: image.image,
-                            updatedAt: updatedAt
-                        })
+
+                        var imageBuff = Meteor.call('imageToBuffer',image.image);
+                        var rs = Async.runSync(function(done){
+                            lwip.open(imageBuff,'jpg',function(error, img){
+                                console.log(error,img);
+                                img.batch()
+                                    .scale('0.5')
+                                    .toBuffer('jpg',function(error, buff){
+                                        done(error, buff);
+                                    })
+                            })
+                        });
+                        console.log(rs.result);
+                        if(rs.result){
+                            Images.upsert({imageId: image.imageId, albumId: aId}, {
+                                albumId: aId,
+                                imageId: image.imageId,
+                                thumb: image.thumb,
+                                src: image.image,
+                                updatedAt: updatedAt
+                            });
+                            ImageThumbs.insert(rs.result, function(error, fileObj){
+                                /*Images.update({imageId : image.imageId},{
+                                 $set : {
+                                 thumbId : fileObj._id
+                                 }
+                                 });*/
+                                if(error) console.log('Upload Error', error);
+                                if(fileObj) console.log(fileObj);
+                            })
+                        }
+
                     });
                     result = true;
                 }
@@ -68,6 +93,11 @@ if (Meteor.isServer) {
                 console.log(ex);
                 throw new Meteor.Error(ex);
             }
+        },
+        imageToBuffer : function(imageUrl) {
+            var result = request.getSync(imageUrl, {encoding: null});
+            return result.body;
+            //return new Buffer(result.body).toString('base64');
         }
     })
 }

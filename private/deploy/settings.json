@@ -12,5 +12,12 @@
         "detail" : "xhamster_fetchAlbum"
       }
     ]
+  },
+  "private" : {
+    "AmazonWs" : {
+      "AWSAccessKeyId" : "AKIAITH6BVHRFGFLSARA",
+      "AWSSecretAccessKey" : "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",
+      "AWSBucket" : "exleaked-thumbs"
+    }
   }
 }

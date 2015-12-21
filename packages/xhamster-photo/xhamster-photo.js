@@ -46,13 +46,14 @@ if(Meteor.isServer){
                 var rs = Async.runSync(function(done){
                     var x = Xray();
                     x(href,{
+                        description : 'meta[name="description"]@content',
                         tags : ['#channels a@text']
                     })
                     (function(error,data){
                         var album = {
                             _albumId : albumId,
                             title : title,
-                            description : 'meta[name="description"]@content',
+                            description : data.description,
                             tags : _.map(data.tags, function(t){ return t.toLowerCase()})
                         }
                         done(error,album);
